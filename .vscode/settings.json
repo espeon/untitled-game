@@ -1,0 +1,29 @@
+{
+    // This prevents Omnisharp from prematurely creating obj and bin directories.
+    // Change this to true after changing the name of the csproj file and running Restore Project.
+    "omnisharp.autoStart": true,
+
+    // This just circumvents annoying default behavior with the C# extension...
+    // If you really like Code Lens, feel free to change this.
+    "csharp.referencesCodeLens.enabled": true,
+	
+    "files.exclude": {
+        "**/.[^v]*": true, // hide any files that start with a '.' but keep the .vscode folder
+        ".vs": true, // Visual Studio settings
+        "getFNA.*": true,
+        "imgui.ini": true,
+        "MonoGameContent.targets": true,
+        "**/obj": true,
+        "**/bin": true,
+        ".gitignore": true,
+        ".gitmodules": true,
+        "README.md": true,
+        "fnalibs": true,
+        "project_name/CompiledContent/.mgstats": true,
+        "**/*.csproj*": true,
+        "**/*.sln": true,
+        "FNA/[^src]*": true, // hide everything but the src folder
+        "Nez/{[^DN]*}": true, // hide everything except what begins with D or N
+        "Nez/Nez.*.*": true, // hide the files in the root of the repo
+    }
+}

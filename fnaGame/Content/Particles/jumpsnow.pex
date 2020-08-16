@@ -1,0 +1,40 @@
+<particleEmitterConfig>
+  <yCoordFlipped value="1" />
+  <sourcePosition x="0" y="0" />
+  <sourcePositionVariance x="0" y="0" />
+  <speed value="100" />
+  <speedVariance value="10.00" />
+  <particleLifeSpan value="2.0000" />
+  <particleLifespanVariance value="1.0000" />
+  <angle value="90" />
+  <angleVariance value="100" />
+  <gravity x="0" y="300" />
+  <radialAcceleration value="-20.00" />
+  <radialAccelVariance value="0.00" />
+  <tangentialAcceleration value="15.00" />
+  <tangentialAccelVariance value="0.00" />
+  <startColor red="0.16" green="0.35" blue="0.80" alpha="1.00" />
+  <startColorVariance red="0.00" green="0.00" blue="0.00" alpha="0.00" />
+  <finishColor red="0.00" green="0.00" blue="0.00" alpha="1.00" />
+  <finishColorVariance red="0.00" green="0.00" blue="0.00" alpha="0.00" />
+  <maxParticles value="1000" />
+  <startParticleSize value="2.00" />
+  <startParticleSizeVariance value="1.00" />
+  <finishParticleSize value="0.00" />
+  <finishParticleSizeVariance value="0.00" />
+  <duration value=".05" />
+  <emitterType value="0" />
+  <maxRadius value="0.00" />
+  <maxRadiusVariance value="0.00" />
+  <minRadius value="300.00" />
+  <minRadiusVariance value="0.00" />
+  <rotatePerSecond value="360.00" />
+  <rotatePerSecondVariance value="0.00" />
+  <blendFuncSource value="770" />
+  <blendFuncDestination value="1" />
+  <rotationStart value="0.00" />
+  <rotationStartVariance value="0.00" />
+  <rotationEnd value="0.00" />
+  <rotationEndVariance value="0.00" />
+  <texture name="texture.png" data="H4sIAAAAAAAEAAG+AkH9iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAChUlEQVR4Ac2XPWiaURSGM5mYOEgspAGLiKA1S1xKEFpQyBCKEKlbXYTUrWZwMODQRaSdXIKLQocsTiGzSxDHjIFA5gyuWbJ/eQ95Bvnyn5Bch4cDh3Pee849914/5zzPm3PJS5LmRVAsiiVsEP+bFWDiIREWH8SK+ChWsSv4w8Q9uZjHAgIIRlgsJhIiJdJiDZvCHyMuQl7gNQUs0JF1GBefxbr4IrLiq/iGzeJfJy5OXhidZxdgM10WUZEUGRbJiy1RENuiiC3gzxOXIS+KTvA5BSyQ9Inttc5y4rsoiZ+iInbEL2wFf4m4HHlpdJbv24m7Zh6mckveEJt0WhZVURN10RB72Dr+KnFF8jbQiaIbeKyAELNL0oGJ/KDD3yz2R7TEX/EP28LfIK5C3iY6SXRDDxVgV8dOb5wZ5ujExHZFU7RFR3RFT/SxXfxt4nbJK6KTQTfi+a6ov3u7QnaKs8yyTEdNOt0X/8VAHIoj7AD/PnFN8sroZNFd9e/CdAE2o5h3c5XsNJeYaYPOTPyARYdiJMbYIf4D4trkVdHJoxtjnVsF2LbYS5ZgZnal7FTXmG2HDm2RY3EiTsUZ9gT/EXEd8mrobKGbYJ15fwF2T+05TbFdBWZop7vFjAd0aoudiwsxwZ7jHxLXJa+OTgHdFOsE/QXYD4qdUrsy9rLZ47LDNtpMe8x6RMe26KW4wl7gHxHXI6+Bzja6adZZ9Bdgv2p2QOxtt+fVTq89MnbP7ar12d4x2z5hcQ87wT8mrk/eHjpFdNdYZ2nmdsD5GXB+C5y/AzPxEjr/LXD+azgT3wPOv4im3wVn34TTO+Hsq3j6TDj7X+C/ok7+Gd1XzLv/N3wznBdwDYFH1mwUn5p2AAAAAElFTkSuQmCC2hgT7b4CAAA=" />
+</particleEmitterConfig>

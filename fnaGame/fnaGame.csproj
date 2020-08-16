@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net471</TargetFramework>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <AssemblyName>fnaGame</AssemblyName>
+        <MonoGamePlatform>DesktopGL</MonoGamePlatform>
+        <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    </PropertyGroup>
+    
+    <!-- Reference FNA, Nez, ImGui and Persistence projects. Optionally add a Farseer reference here and in the .sln file -->
+    <ItemGroup>
+        <ProjectReference Include="../FNA/FNA.csproj"/>
+        <ProjectReference Include="../Nez/Nez.Portable/Nez.FNA.csproj"/>
+		<ProjectReference Include="../Nez/Nez.Persistence/Nez.FNA.Persistence.csproj" />
+        <ProjectReference Include="../Nez/Nez.ImGui/Nez.FNA.ImGui.csproj"/>
+		<!-- <ProjectReference Include="../Nez/Nez.FarseerPhysics/Nez.FNA.FarseerPhysics.csproj" /> -->
+    </ItemGroup>
+    
+    <!-- Includes Nez default effects and textures -->
+    <ItemGroup>
+        <Content Include="../Nez/DefaultContent/FNAEffects/**/*.fxb">
+            <Link>Content/nez/effects/%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="../Nez/DefaultContent/textures/**/*.xnb">
+            <Link>Content/nez/textures/%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    
+    <!-- Include the Content directory (except for .fx files, since we use .fxb at runtime) -->
+    <ItemGroup>
+        <Content Include="Content/**/*.*" Exclude="**/*.fx; Content/Content-Goes-Here.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    
+    <!-- Include the CompiledContent bin (MGCB output). Copy it to the Content folder in the build. -->
+    <ItemGroup>
+        <Content Include="CompiledContent/bin/DesktopGL/**/*.xnb">
+            <Link>Content/%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <!-- cleanup so VS looks clean -->
+        <None Remove="CompiledContent\obj\**"/>
+        <None Remove="CompiledContent\bin\**"/>
+        <None Remove="CompiledContent\.*"/>
+    </ItemGroup>
+    
+    <Import Project="../MonoGameContent.targets"/>
+    
+    
+    <PropertyGroup>
+        <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+        <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+    </PropertyGroup>
+    
+    <!-- Copy fnalib directories to output -->
+    <ItemGroup>
+        <Content Include="..\fnalibs\x86\**\*.*" Visible="false" Condition="'$(OS)' == 'Windows_NT' AND '$(Platform)' != 'x64'">
+            <Link>x86\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\fnalibs\x64\**\*.*" Visible="false" Condition="'$(OS)' == 'Windows_NT' AND '$(Platform)' != 'x86'">
+            <Link>x64\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\fnalibs\osx\**\*.*" Visible="false" Condition="'$(OS)' != 'Windows_NT' AND $(IsOSX) == 'true'">
+            <Link>osx\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\fnalibs\lib\**\*.*" Visible="false" Condition="'$(OS)' != 'Windows_NT' AND $(IsLinux) == 'true'">
+            <Link>lib\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\fnalibs\lib64\**\*.*" Visible="false" Condition="'$(OS)' != 'Windows_NT' AND $(IsLinux) == 'true'">
+            <Link>lib64\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+</Project>

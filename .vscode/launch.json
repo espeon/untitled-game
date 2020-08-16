@@ -1,0 +1,68 @@
+{
+    // Change "mono" to "clr" for 64-bit .NET Framework debugging on Windows.
+    // (See: https://github.com/OmniSharp/omnisharp-vscode/wiki/Desktop-.NET-Framework)
+
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch (Windows)",
+            "type": "clr",
+            "request": "launch",
+            "program": "${workspaceFolder}/fnaGame/bin/Debug/fnaGame.exe",
+            "cwd": "${workspaceFolder}/fnaGame",
+            "preLaunchTask": "Build (Debug)"
+        },
+		
+        {
+            "name": "Launch Without Building (Windows)",
+            "type": "clr",
+            "request": "launch",
+            "program": "${workspaceFolder}/fnaGame/bin/Debug/fnaGame.exe",
+            "cwd": "${workspaceFolder}"
+        },
+
+        {
+            "name": "Launch Release (Windows)",
+            "type": "clr",
+            "request": "launch",
+            "program": "${workspaceFolder}/fnaGame/bin/Release/fnaGame.exe",
+            "cwd": "${workspaceFolder}/fnaGame",
+            "preLaunchTask": "Build (Release)"
+        },
+
+        {
+            "name": "Launch (Mac)",
+            "type": "mono",
+            "request": "launch",
+            "program": "${workspaceFolder}/fnaGame/bin/Debug/fnaGame.exe",
+            "cwd": "${workspaceFolder}/fnaGame",
+            "preLaunchTask": "Build (Debug)",
+            "osx":{
+                "env": {
+                    "DYLD_LIBRARY_PATH": "${workspaceFolder}/fnaGame/bin/Debug/osx/"
+                }
+            }
+        },
+		
+        {
+            "name": "Launch Without Building (Mac)",
+            "type": "mono",
+            "request": "launch",
+            "program": "${workspaceFolder}/fnaGame/bin/Debug/fnaGame.exe",
+            "cwd": "${workspaceFolder}",
+            "osx":{
+                "env": {
+                    "DYLD_LIBRARY_PATH": "${workspaceFolder}/fnaGame/bin/Debug/osx/"
+                }
+            }
+        },
+
+        {
+            "name": "Attach",
+            "type": "mono",
+            "request": "attach",
+            "address": "localhost",
+            "port": 55555
+        }
+    ]
+}

@@ -1,0 +1,183 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Restore Project",
+            "type": "shell",
+            "command": "msbuild /t:restore",
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+		
+        {
+            // this does a bunch of stuff:
+            // - update submodules to lastest (fetch latest Nez version)
+            // - clean, restore and rebuild Nez.sln (nuget restore to get latest packages)
+            // - clean, restore and rebuild Nez.FNA.sln (nuget restore Nez.FNA)
+            "label": "Update, Restore and Rebuild Nez",
+            "type": "shell",
+            "command": "git submodule foreach --recursive git pull && msbuild Nez/Nez.sln /t:clean /t:restore && msbuild Nez/Nez.FNA.sln /t:clean /t:restore",
+            "group": "build",
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+        },
+
+        {
+            "label": "Clean Project",
+            "type": "shell",
+            "command": "msbuild fnaGame /t:clean /p:configuration=Debug && msbuild fnaGame /t:clean /p:configuration=Release",
+            "group": "build",
+            "problemMatcher": "$msCompile",
+        },
+
+        {
+            "label": "Build (Debug)",
+            "type": "shell",
+            "command": "msbuild",
+            "args": [
+                "fnaGame.sln",
+                "/p:configuration=Debug",
+                "/p:platform=Any CPU",
+                "/t:build",
+                "-m"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile",
+			"dependsOn": "Build Content",
+        },
+
+        {
+            "label": "Build (Release)",
+            "type": "shell",
+            "command": "msbuild",
+            "args": [
+                "fnaGame.sln",
+                "/p:configuration=Release",
+                "/p:platform=Any CPU",
+                "/t:build",
+                "-m"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile",
+        },
+
+        {
+            "label": "Build and Run (Debug)",
+            "type": "shell",
+            "group": "build",
+            "osx":{
+                "command": "DYLD_LIBRARY_PATH=${workspaceFolder}/fnaGame/bin/Debug/osx/ mono ${workspaceFolder}/fnaGame/bin/Debug/fnaGame.exe"
+            },
+            "windows":{
+                "command": "start",
+                "args": [
+                    "${workspaceFolder}/fnaGame/bin/Debug/fnaGame.exe"
+                ]
+            },
+            "dependsOn": "Build (Debug)",
+            "problemMatcher": "$msCompile"
+        },
+
+        {
+            "label": "Build and Run (Release)",
+            "type": "shell",
+            "group": "build",
+            "osx":{
+                "command": "DYLD_LIBRARY_PATH=${workspaceFolder}/fnaGame/bin/Release/osx/ mono ${workspaceFolder}/fnaGame/bin/Release/fnaGame.exe"
+            },
+            "windows":{
+                "command": "start",
+                "args": [
+                    "${workspaceFolder}/fnaGame/bin/Release/fnaGame.exe"
+                ]
+            },
+            "dependsOn": "Build (Release)",
+            "problemMatcher": "$msCompile"
+        },
+
+        {
+            "label": "Build Effects",
+            "type": "shell",
+            "group": "build",
+            "osx":{
+                "command": "${workspaceFolder}/.vscode/buildEffects.sh"
+            },
+            "windows":{
+                "command": "powershell",
+                "args": [
+                    "-File",
+                    "${workspaceFolder}/.vscode/buildEffects.ps1"
+                ],
+            },
+            "problemMatcher": "$msCompile"
+        },
+		
+        {
+            "label": "Build Content",
+            "type": "shell",
+            "group": "build",
+            "command": "msbuild /t:BuildContent",
+            "options": {
+                "cwd": "${workspaceFolder}/fnaGame"
+            },
+            "problemMatcher": "$msCompile"
+        },
+
+        {
+            "label": "Force Build Content",
+            "type": "shell",
+            "group": "build",
+            "osx": {
+                "command": "mono /Applications/Pipeline.app/Contents/MonoBundle/MGCB.exe /@:Content.mgcb -r",
+            },
+            "windows": { 
+                "command":"C:/Program Files (x86)/MSBuild/MonoGame/v3.0/Tools/MGCB.exe", 
+                "args": [
+                    "/@:Content.mgcb",
+                    "-r"
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/fnaGame/CompiledContent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+
+        {
+            "label": "Open Pipeline Tool",
+            "type": "shell",
+            "group": "build",
+            "osx": {
+                "command": "export MONOGAME_PIPELINE_PROJECT=${workspaceFolder}/fnaGame/CompiledContent/Content.mgcb && /Applications/Pipeline.app/Contents/MacOS/Pipeline"
+            },
+            "windows": {
+                "command": "${workspaceFolder}/fnaGame/CompiledContent/Content.mgcb"
+            },
+            "problemMatcher": "$msCompile"
+        },
+		
+        {
+            "label": "Process T4 Templates",
+            "type": "shell",
+            "osx": {
+                "command": "${workspaceFolder}/.vscode/processT4Templates.sh"
+            },
+            "windows": {
+                "command": "powershell",
+                "args": [ 
+                    "-File",
+                    "${workspaceFolder}/.vscode/processT4Templates.ps1" 
+                ]
+            },
+            "group": "build",
+            "problemMatcher": "$msCompile",
+        },
+    ]
+}
